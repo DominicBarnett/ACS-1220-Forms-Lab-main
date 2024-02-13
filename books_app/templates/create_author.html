@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>Author creation form.</p>
+
+<!-- TODO: Add a <form> element here and use the form variable to show the labels & fields -->
+    <form method="POST" action="{{ url_for('main.create_author') }}">
+        {{ form.csrf_token }}
+        <fieldset>
+            <legend>Add an Author</legend>
+    
+            {{ form.author_name.label }}
+            {{ form.author_name }}
+            <!-- Show form errors -->
+            <ul>
+            {% for error in form.author_name.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+            
+            {{ form.author_bio.label }}
+            {{ form.author_bio(placeholder="This author usually writes these kinds of books") }}
+            <!-- Show form errors -->
+            <ul>
+            {% for error in form.author_bio.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+            
+            {{ form.submit }}
+        </fieldset>
+    </form>
+
+{% endblock %}
